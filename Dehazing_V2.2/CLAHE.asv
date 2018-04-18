@@ -1,0 +1,17 @@
+function output = clahe[rgbimg]
+
+
+hsvimg = rgb2hsv (rgbimg);
+img_org_v=uint8(hsvimg(:,:,3)*2^8);
+
+% VÕ®µ¿»•ŒÌ
+img_ahe_v = adapthisteq(img_org_v,'NumTiles',[8 8],'ClipLimit',0.01,'NBins',256);
+
+hsvimg1=cat(3, double(img_ahe_v)/2^8, double(img_ahe_s)/2^8, hsvimg(:,:,3));
+rgbimg_HE=hsv2rgb(hsvimg1);
+
+imwrite(rgbimg_HE,[path,fn,'_CLAHE','.',ft],ft);
+output=round(uint8(rgbimg_HE*256)
+imwrite(dehaze,[path,fn,'_dehaze','.',ft],ft);
+
+t=toc
